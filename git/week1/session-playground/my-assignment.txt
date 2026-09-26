@@ -1,0 +1,2 @@
+This is my Git Week 1 assignment.
+I am learning how Git branches and commits work.
