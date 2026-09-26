@@ -1,0 +1,5 @@
+
+This is my Git Week 1 assignment.
+I am learning how Git branches and commits work.
+I am practicing Git workflows with HackYourFuture.
+Adding some more text after i did PR 
