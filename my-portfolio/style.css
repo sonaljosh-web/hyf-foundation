@@ -1,14 +1,14 @@
 /* General page styling */
 
 body {
-  font-family: poppins, sans-serif;
+  font-family: Poppins, sans-serif;
   margin: 0;
   line-height: 1.6;
 }
 
 /* Navigation */
 
-nav {
+.navbar {
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -23,6 +23,8 @@ nav {
 .logo {
   justify-self: start;
   font-weight: bold;
+  color: #222;
+  text-decoration: none;
 }
 
 .logo span {
@@ -35,7 +37,17 @@ nav {
   gap: 20px;
   justify-content: center;
 }
-
+.navbar-link {
+  color: #222;
+  text-decoration: none;
+  font-weight: bold;
+}
+/*
+.navbar a {
+  color: #222;
+  text-decoration: none;
+  font-weight: bold;
+}*/
 .contact-link {
   justify-self: end;
 }
@@ -51,78 +63,51 @@ nav {
   opacity: 0.6;
 }
 
-nav a {
-  color: #222;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-nav a.active,
-nav a.active:hover,
-nav a.active:focus {
+.navbar-link.active,
+.navbar-link.active:hover,
+.navbar-link.active:focus {
   color: #8355ed;
-}
-
-nav a.logo.active,
-nav a.logo.active:hover,
-nav a.logo.active:focus {
-  color: #222;
-}
-
-a:hover {
-  border-radius: 4px;
 }
 
 /* Hero section */
 
-header {
-  text-align: center;
-  padding: 100px 20px;
-  background-color: #f4f4f4;
-}
-
-header h1 {
-  font-size: 1rem;
-}
-
-h2 {
-  font-size: 4rem;
-  font-weight: 700;
-}
-h2 span {
-  color: #8355ed;
-}
 .hero {
+  text-align: center;
+  background-color: #f4f4f4;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 40px;
   padding: 80px 5%;
+  width: 100%;
 }
-
+.hero-intro {
+  flex: 1;
+  text-align: left;
+  line-height: 1.2;
+}
 .hero-title {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
+.hero h1 {
+  font-size: 1rem;
+}
+
+.hero-heading {
+  font-size: 4rem;
+  font-weight: 700;
+}
+.hero-heading span {
+  color: #8355ed;
+}
+
 .hero-title img {
   width: 36px;
   height: 36px;
-}
-
-.hero-intro {
-  flex: 1;
-  text-align: left;
-  line-height: 1.2;
-}
-
-.hero-intro h1,
-.hero-intro h2,
-.hero-intro p {
-  line-height: 1.2;
-  margin-top: 0;
-  margin-bottom: 10px;
 }
 
 .hero-image-wrapper {
@@ -141,17 +126,17 @@ h2 span {
 
 /* Sections */
 
-section {
+.content-section {
   max-width: 800px;
   margin: 0 auto 0 5%;
   padding: 40px 20px;
   scroll-margin-top: 100px;
 }
-section h2 {
+.section-title {
   font-size: 1.5rem;
   text-align: left;
 }
-section + section {
+.content-section + .content-section {
   padding-top: 20px;
 }
 
@@ -165,7 +150,7 @@ section + section {
 
 /* Buttons */
 
-button {
+.primary-button {
   background-color: #8355ed;
   color: white;
   padding: 10px 20px;
@@ -175,7 +160,7 @@ button {
 
 /* Footer */
 
-footer {
+.site-footer {
   text-align: center;
   padding: 30px;
   background-color: #222;

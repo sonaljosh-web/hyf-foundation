@@ -12,7 +12,8 @@ helloButton.addEventListener("click", function () {
   helloButton.style.backgroundColor = randomColor;
 });
 
-const navLinks = document.querySelectorAll("nav a");
+const navLinks = document.querySelectorAll(".navbar-link");
+const logo = document.querySelector(".logo");
 
 navLinks.forEach(function (link) {
   link.addEventListener("click", function () {
@@ -21,5 +22,10 @@ navLinks.forEach(function (link) {
     });
 
     link.classList.add("active");
+  });
+});
+logo.addEventListener("click", function () {
+  navLinks.forEach(function (item) {
+    item.classList.remove("active");
   });
 });
