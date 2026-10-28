@@ -12,12 +12,12 @@ function getReply(command) {
   //my name
   if (lowercaseCommand.startsWith("hello my name is ")) {
     const sliceLength = "hello my name is ".length;
-    const name = command.slice(sliceLength);
-    if (userName.toLowerCase() == name) {
-      return `you have already told me your name ${name}`;
+    const name = command.slice(sliceLength).trim();
+    if (userName.toLowerCase() === name.toLowerCase()) {
+      return `You have already told me your name ${userName}`;
     }
     userName = name;
-    return ` nice to meet you ${name}.`;
+    return `Nice to meet you ${name}`;
   }
   //what is my name
   else if (lowercaseCommand === "what is my name") {
@@ -41,11 +41,13 @@ function getReply(command) {
     return `${todoStr} added to your todo`;
   } //what is on my todo list
   else if (lowercaseCommand === "what is on my todo?") {
-    if (toDo.length == 0) {
-      return `you have nothing in your todo list!`;
-    } else {
-      return `you have ${toDo.length} todo ${toDo}`;
+    if (toDo.length === 0) {
+      return "You have nothing in your todo list!";
     }
+
+    const todoItems = toDo.join(" and ");
+
+    return `You have ${toDo.length} todos: ${todoItems}`;
   } //remove items from to do list
   else if (
     lowercaseCommand.endsWith("from my todo") &&
@@ -72,55 +74,72 @@ function getReply(command) {
     const month = today.toLocaleDateString("en-GB", { month: "long" });
     const day = today.toLocaleDateString("en-GB", { day: "numeric" });
     return `${day}. of ${month} ${year}`;
-  } else if (lowercaseCommand.startsWith("what is ")) {
-    const sliceLength = "what is ".length;
-    const tmpStr = lowercaseCommand.slice(sliceLength).replaceAll(" ", "");
-    const firstNum = Number(tmpStr[0]);
-    const secondNum = Number(tmpStr[2]);
-    let resultSum = 0;
-    switch (tmpStr[1]) {
+  } // Math calculations
+  else if (lowercaseCommand.startsWith("what is ")) {
+    const expression = lowercaseCommand.slice("what is ".length).trim();
+    const match = expression.match(
+      /^(-?\d+(?:\.\d+)?)\s*([+\-*/])\s*(-?\d+(?:\.\d+)?)$/,
+    );
+    if (!match) {
+      return "Sorry, I can only calculate simple math expressions.";
+    }
+    const firstNum = Number(match[1]);
+    const operator = match[2];
+    const secondNum = Number(match[3]);
+    let result;
+    switch (operator) {
       case "+":
-        resultSum = firstNum + secondNum;
+        result = firstNum + secondNum;
         break;
       case "-":
-        resultSum = firstNum - secondNum;
+        result = firstNum - secondNum;
         break;
       case "*":
-        resultSum = firstNum * secondNum;
+        result = firstNum * secondNum;
         break;
       case "/":
-        resultSum = firstNum / secondNum;
+        if (secondNum === 0) {
+          return "You cannot divide by zero.";
+        }
+        result = firstNum / secondNum;
         break;
     }
-    //return resultSum;
-    return `${tmpStr} is ${resultSum}`;
+    return `${expression} is ${result}`;
   } //set timer
   else if (lowercaseCommand.startsWith("set a timer for ")) {
-    const sliceLength_1 = "set a timer for ".length;
-    const sliceLength_2 = lowercaseCommand.lastIndexOf(" ");
-    const timerNum = Number(
-      lowercaseCommand.slice(sliceLength_1, sliceLength_2).trim(),
+    const timerCommand = lowercaseCommand
+      .slice("set a timer for ".length)
+      .trim();
+    const match = timerCommand.match(
+      /^(\d+(?:\.\d+)?)\s+(second|seconds|minute|minutes|hour|hours)$/,
     );
-    const timerStr = lowercaseCommand.slice(sliceLength_2).trim();
-    let milliseconds = 0;
-    switch (timerStr) {
-      case "hour":
-      case "hours":
-        milliseconds = timerNum * 60 * 60 * 1000;
+    if (!match) {
+      return "Please specify a valid time, such as 4 minutes or 10 seconds.";
+    }
+    const timerNum = Number(match[1]);
+    const timerUnit = match[2];
+    if (timerNum <= 0) {
+      return "Please set a timer for a positive amount of time.";
+    }
+    let milliseconds;
+    switch (timerUnit) {
+      case "second":
+      case "seconds":
+        milliseconds = timerNum * 1000;
         break;
       case "minute":
       case "minutes":
         milliseconds = timerNum * 60 * 1000;
         break;
-      case "second":
-      case "seconds":
-        milliseconds = timerNum * 1000;
+      case "hour":
+      case "hours":
+        milliseconds = timerNum * 60 * 60 * 1000;
         break;
     }
     setTimeout(() => {
       console.log("Timer done!");
     }, milliseconds);
-    return `Timer set for ${timerNum} ${timerStr}`;
+    return `Timer set for ${timerNum} ${timerUnit}`;
   } //random greetings
   else if (lowercaseCommand == "give me a random greeting") {
     const indexRandom = Math.floor(Math.random() * greetings.length);
@@ -138,7 +157,7 @@ console.log(getReply("Remove fishing from my todo"));
 console.log(getReply("What is on my todo?"));
 console.log(getReply("What day is it today?"));
 console.log(getReply("what is 3 + 3"));
-console.log(getReply("what is 5 * 7"));
+console.log(getReply("what is 51 * 7"));
 console.log(getReply("Set a timer for 10 seconds"));
 console.log(getReply("Give me a random greeting"));
 console.log(getReply("testing a command"));
