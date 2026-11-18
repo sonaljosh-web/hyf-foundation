@@ -1,0 +1,76 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #fff8e9;
+  color: #222222;
+}
+
+header {
+  background-color: #111111;
+  color: #f5e500;
+  padding: 20px 8%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav {
+  display: flex;
+  gap: 30px;
+}
+
+nav a {
+  color: #f5e500;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+nav a:hover {
+  color: white;
+}
+.hero {
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.hero h1 {
+  font-size: 45px;
+  color: #111111;
+}
+
+.hero span {
+  color: #d6a500;
+}
+
+.hero p {
+  font-size: 19px;
+  line-height: 1.6;
+}
+
+.about {
+  background-color: white;
+  text-align: center;
+  padding: 60px 10%;
+}
+
+.training {
+  text-align: center;
+  padding: 60px 10%;
+}
+
+button {
+  background-color: #f5e500;
+  color: #111111;
+  border: none;
+  padding: 15px 30px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+footer {
+  background-color: #111111;
+  color: white;
+  text-align: center;
+  padding: 25px;
+}
